@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X } from 'lucide-react';
 
-export function Navigation() {
+export function Navigation({ data }: { data: any }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const profile = data?.profile || {};
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,6 +15,17 @@ export function Navigation() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMobileMenuOpen]);
 
   const navItems = ['Home', 'About', 'Skills', 'Projects', 'Experience', 'Contact'];
 
@@ -43,7 +56,7 @@ export function Navigation() {
               transition={{ delay: 0.2 }}
               className="text-2xl tracking-tight text-cyan-400"
             >
-              Shady<span className="text-white">Yasser</span>
+              {profile.name?.split(' ')[0] || 'Shady'}<span className="text-white">{profile.name?.split(' ')[1] || 'Yasser'}</span>
             </motion.div>
 
             {/* Desktop Menu */}
@@ -75,29 +88,31 @@ export function Navigation() {
       </motion.nav>
 
       {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0, x: '100%' }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: '100%' }}
-          className="fixed inset-0 z-40 bg-slate-950/95 backdrop-blur-lg md:hidden"
-        >
-          <div className="flex flex-col items-center justify-center h-full gap-8">
-            {navItems.map((item, index) => (
-              <motion.button
-                key={item}
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.1 * index }}
-                onClick={() => scrollToSection(item)}
-                className="text-3xl text-slate-300 hover:text-cyan-400 transition-colors"
-              >
-                {item}
-              </motion.button>
-            ))}
-          </div>
-        </motion.div>
-      )}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            className="fixed inset-0 z-40 bg-slate-950/95 backdrop-blur-lg md:hidden"
+          >
+            <div className="flex flex-col items-center justify-center h-full gap-8">
+              {navItems.map((item, index) => (
+                <motion.button
+                  key={item}
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 * index }}
+                  onClick={() => scrollToSection(item)}
+                  className="text-3xl text-slate-300 hover:text-cyan-400 transition-colors"
+                >
+                  {item}
+                </motion.button>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

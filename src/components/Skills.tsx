@@ -4,7 +4,7 @@ import { useInView } from 'motion/react';
 
 export function Skills({ data }: { data: any }) {
   const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const isInView = useInView(ref, { once: true, amount: 0.15 });
 
   const skillCategories = data?.skills || [];
 
@@ -43,7 +43,7 @@ export function Skills({ data }: { data: any }) {
                         <motion.div
                           initial={{ width: 0 }}
                           animate={isInView ? { width: `${skill.level}%` } : {}}
-                          transition={{ delay: categoryIndex * 0.1 + skillIndex * 0.1, duration: 1, ease: 'easeOut' }}
+                          transition={{ delay: categoryIndex * 0.1 + skillIndex * 0.05, duration: 1, ease: 'easeOut' }}
                           className="h-full bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"
                         />
                       </div>

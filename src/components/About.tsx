@@ -5,7 +5,7 @@ import * as Icons from 'lucide-react';
 
 export function About({ data }: { data: any }) {
   const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
   
   const about = data?.about || {};
   const paragraphs = about.paragraphs || [];
@@ -17,7 +17,7 @@ export function About({ data }: { data: any }) {
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
         >
           <motion.h2
             initial={{ opacity: 0, x: -50 }}
@@ -33,7 +33,7 @@ export function About({ data }: { data: any }) {
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ delay: 0.3, duration: 0.8 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
               className="space-y-6"
             >
               {paragraphs.map((paragraph: string, index: number) => (
@@ -51,7 +51,7 @@ export function About({ data }: { data: any }) {
                     key={index}
                     initial={{ opacity: 0, y: 50 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ delay: 0.5 + index * 0.1, duration: 0.6 }}
+                    transition={{ delay: 0.3 + index * 0.1, duration: 0.6 }}
                     whileHover={{ scale: 1.05, y: -5 }}
                     className="bg-slate-800/50 border border-slate-700 rounded-lg p-6 hover:border-cyan-400 transition-all"
                   >

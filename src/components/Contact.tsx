@@ -6,7 +6,7 @@ import { sendContactMessage } from '../utils/api';
 
 export function Contact({ data }: { data: any }) {
   const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const isInView = useInView(ref, { once: true, amount: 0.15 });
   
   const profile = data?.profile || {};
   const contact = data?.contact || {};
@@ -83,16 +83,16 @@ export function Contact({ data }: { data: any }) {
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ delay: 0.4, duration: 0.6 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
               className="space-y-6"
             >
               {contactInfo.map((info, index) => (
                 <motion.a
                   key={index}
                   href={info.href}
-                  initial={{ opacity: 0, x: -30 }}
+                  initial={{ opacity: 0, x: -50 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ delay: 0.5 + index * 0.1 }}
+                  transition={{ delay: 0.4 + index * 0.1 }}
                   whileHover={{ x: 10 }}
                   className="flex items-center gap-4 p-4 bg-slate-800/30 border border-slate-700 rounded-lg hover:border-cyan-400/50 transition-all group"
                 >
@@ -110,9 +110,9 @@ export function Contact({ data }: { data: any }) {
             {/* Social Links */}
             {socialLinks.length > 0 && (
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.8, duration: 0.6 }}
+                transition={{ delay: 0.6, duration: 0.6 }}
                 className="pt-6"
               >
                 <h3 className="text-xl text-white mb-4">Connect With Me</h3>
@@ -139,12 +139,12 @@ export function Contact({ data }: { data: any }) {
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: 0.6, duration: 0.6 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
             className="bg-slate-800/30 border border-slate-700 rounded-lg p-8"
           >
             <h3 className="text-2xl text-white mb-6">{contact.formTitle || 'Send a Message'}</h3>
             {sent && (
-              <div className="mb-4 p-4 bg-green-500/10 border border-green-500/30 rounded-lg text-green-400">
+              <div className="mb-4 p-4 bg-green-500/10 border border-green-500/30 rounded-lg text-green-400 text-sm">
                 Message sent successfully! I'll get back to you soon.
               </div>
             )}
@@ -203,7 +203,7 @@ export function Contact({ data }: { data: any }) {
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 1, duration: 0.6 }}
+          transition={{ delay: 0.8, duration: 0.6 }}
           className="mt-20 pt-8 border-t border-slate-800 text-center"
         >
           <p className="text-slate-500">

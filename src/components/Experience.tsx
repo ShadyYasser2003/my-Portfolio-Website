@@ -5,7 +5,7 @@ import { Briefcase, Calendar, MapPin } from 'lucide-react';
 
 export function Experience({ data }: { data: any }) {
   const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const isInView = useInView(ref, { once: true, amount: 0.15 });
 
   const experiences = data?.experiences || [];
   const certifications = data?.certifications || [];
@@ -32,19 +32,19 @@ export function Experience({ data }: { data: any }) {
                   key={index}
                   initial={{ opacity: 0, x: -50 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ delay: index * 0.2, duration: 0.6 }}
+                  transition={{ delay: index * 0.15, duration: 0.6 }}
                   className="relative pl-8 border-l-2 border-slate-700 hover:border-cyan-400 transition-all"
                 >
                   {/* Timeline dot */}
                   <motion.div
                     initial={{ scale: 0 }}
                     animate={isInView ? { scale: 1 } : {}}
-                    transition={{ delay: index * 0.2 + 0.3, type: 'spring' }}
+                    transition={{ delay: index * 0.15 + 0.2, type: 'spring' }}
                     className="absolute left-0 top-0 w-4 h-4 -ml-[9px] bg-cyan-400 rounded-full border-4 border-slate-950"
                   />
 
                   <div className="bg-slate-800/30 border border-slate-700 rounded-lg p-6 hover:border-cyan-400/50 transition-all">
-                    <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+                    <div className="flex items-start justify-between mb-4">
                       <div>
                         <h3 className="text-xl text-white mb-1">{exp.title}</h3>
                         <p className="text-cyan-400">{exp.company}</p>
@@ -67,7 +67,7 @@ export function Experience({ data }: { data: any }) {
                           key={achIndex}
                           initial={{ opacity: 0, x: -20 }}
                           animate={isInView ? { opacity: 1, x: 0 } : {}}
-                          transition={{ delay: index * 0.2 + 0.4 + achIndex * 0.1 }}
+                          transition={{ delay: index * 0.15 + 0.3 + achIndex * 0.05 }}
                           className="text-slate-300 text-sm flex items-start gap-2"
                         >
                           <span className="text-cyan-400 mt-1">▹</span>
@@ -90,7 +90,7 @@ export function Experience({ data }: { data: any }) {
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.4, duration: 0.6 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
               className="bg-slate-800/30 border border-slate-700 rounded-lg p-6 sticky top-24"
             >
               <div className="flex items-center gap-3 mb-6">
@@ -107,7 +107,7 @@ export function Experience({ data }: { data: any }) {
                       key={index}
                       initial={{ opacity: 0, x: 20 }}
                       animate={isInView ? { opacity: 1, x: 0 } : {}}
-                      transition={{ delay: 0.6 + index * 0.1 }}
+                      transition={{ delay: 0.5 + index * 0.1 }}
                       whileHover={{ x: 5 }}
                       className="text-slate-300 text-sm flex items-start gap-2 group cursor-default"
                     >

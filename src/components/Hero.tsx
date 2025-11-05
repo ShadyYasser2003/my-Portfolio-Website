@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { Github, Linkedin, Mail, ChevronDown, Twitter, Download } from 'lucide-react';
 import defaultProfileImage from 'figma:asset/1ac8a0de9b9832b65561dc9bbf6bb3579a3f1c6d.png';
 
 export function Hero({ data }: { data: any }) {
   const profile = data?.profile || {};
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   
   const scrollToAbout = () => {
     const element = document.getElementById('about');
@@ -18,7 +28,7 @@ export function Hero({ data }: { data: any }) {
       {/* Animated Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-blue-500/10"></div>
-        {[...Array(20)].map((_, i) => (
+        {!isMobile && [...Array(20)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute bg-cyan-400/5 rounded-full"
@@ -45,7 +55,7 @@ export function Hero({ data }: { data: any }) {
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
           {/* Text Content */}
-          <div className="flex-1 space-y-6">
+          <div className="flex-1 space-y-6 mt-20 lg:mt-0">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -73,7 +83,7 @@ export function Hero({ data }: { data: any }) {
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.5, duration: 0.8 }}
-                className="text-3xl md:text-5xl text-slate-400 mb-6"
+                className="text-4xl md:text-5xl text-slate-400 mb-6"
               >
                 {profile.title || 'DevOps Engineer'}
               </motion.h2>
@@ -145,6 +155,7 @@ export function Hero({ data }: { data: any }) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.1 }}
+              className="pt-4"
             >
               {profile.resumeUrl ? (
                 <motion.a
@@ -154,7 +165,7 @@ export function Hero({ data }: { data: any }) {
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center gap-2 px-8 py-3 bg-cyan-500 hover:bg-cyan-600 text-slate-950 rounded-lg transition-colors mt-4"
+                  className="inline-flex items-center gap-2 px-8 py-3 bg-cyan-500 hover:bg-cyan-600 text-slate-950 rounded-lg transition-colors"
                 >
                   <Download className="w-5 h-5" />
                   Download Resume
@@ -163,7 +174,7 @@ export function Hero({ data }: { data: any }) {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-8 py-3 bg-cyan-500 hover:bg-cyan-600 text-slate-950 rounded-lg transition-colors mt-4 opacity-50 cursor-not-allowed"
+                  className="px-8 py-3 bg-cyan-500 hover:bg-cyan-600 text-slate-950 rounded-lg transition-colors opacity-50 cursor-not-allowed"
                   disabled
                 >
                   Upload Resume in Dashboard
@@ -192,7 +203,7 @@ export function Hero({ data }: { data: any }) {
             />
             <motion.div
               whileHover={{ scale: 1.05 }}
-              className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96"
+              className="relative w-80 h-80 lg:w-96 lg:h-96"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full opacity-20 blur-xl"></div>
               <img
