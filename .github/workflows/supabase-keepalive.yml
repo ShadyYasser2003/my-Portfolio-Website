@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Ping Supabase (tiny DB read)
         run: |
-          curl -sS -L -X GET "https://awkdskiarwhkvxkzupph.supabase.co/rest/v1/global_settings?select=id&limit=1" \
+          curl -sS -L -X GET "https://tlvrupmhyfzdsptehwgf.supabase.co/rest/v1/global_settings?select=id&limit=1" \
             -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
             -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
             -H "Content-Type: application/json" \
