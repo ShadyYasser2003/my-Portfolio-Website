@@ -207,7 +207,7 @@ export function Contact({ data }: { data: any }) {
           className="mt-20 pt-8 border-t border-slate-800 text-center"
         >
           <p className="text-slate-500">
-            Designed & Built by {profile.name || 'Shady Yasser'} • © 2025
+            Designed & Built by {profile.name || 'Shady Yasser'} • © 2026 All rights reserved.
           </p>
         </motion.div>
       </div>
