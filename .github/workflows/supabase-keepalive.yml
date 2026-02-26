@@ -1,0 +1,18 @@
+name: Supabase Keep Alive
+
+on:
+  schedule:
+    - cron: '0 0 */2 * *'   # كل يومين في منتصف الليل وظهرًا (كل 48 ساعة)
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase (tiny DB read)
+        run: |
+          curl -sS -L -X GET "https://awkdskiarwhkvxkzupph.supabase.co/rest/v1/global_settings?select=id&limit=1" \
+            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -H "Content-Type: application/json" \
+            --max-time 20
